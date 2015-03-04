@@ -12,22 +12,26 @@
      */
     var Omikuji, OmikujiBox, num;
     Omikuji = (function() {
-      Omikuji = function(options) {
+      function Omikuji(options) {
         this.count = 0;
         this.name = options.name;
         this.percentage = options.percentage;
-      };
+        return;
+      }
+
       Omikuji.prototype.countup = function() {
         this.count += 1;
       };
+
       return Omikuji;
+
     })();
 
     /*
     Collection
      */
     OmikujiBox = (function() {
-      OmikujiBox = function() {
+      function OmikujiBox() {
         this.models = [
           new Omikuji({
             name: "大吉",
@@ -44,7 +48,9 @@
           })
         ];
         this.setRanges();
-      };
+        return;
+      }
+
       OmikujiBox.prototype.setRanges = function() {
         var total;
         total = 0;
@@ -54,6 +60,7 @@
           model.top = total;
         });
       };
+
       OmikujiBox.prototype.pull = function() {
         var matchIndex, random;
         random = Math.round(Math.random() * 100);
@@ -66,13 +73,16 @@
         this.models[matchIndex].countup();
         return this.models[matchIndex];
       };
+
       OmikujiBox.prototype.result = function() {
         console.log("------ " + num + "回引いた結果 ------");
         this.models.forEach(function(model) {
           console.log(model.name + " : " + model.count + "回");
         });
       };
+
       return OmikujiBox;
+
     })();
     num = 100;
     return document.getElementById("omikuji").addEventListener("click", function() {

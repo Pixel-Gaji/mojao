@@ -6,24 +6,22 @@ window.onload = ->
   ###
   Model
   ###
-  Omikuji = do ->
-    Omikuji = (options) ->
+  class Omikuji
+    constructor: (options) ->
       @count = 0
       @name  = options.name
       @percentage = options.percentage
       return
 
-    Omikuji::countup = ->
+    countup: ->
       @count += 1
       return
-
-    return Omikuji
 
   ###
   Collection
   ###
-  OmikujiBox = do ->
-    OmikujiBox = () ->
+  class OmikujiBox
+    constructor: ->
       @models = [
         new Omikuji({ name: "大吉", percentage: 5 })
         new Omikuji({ name: "中吉", percentage: 40 })
@@ -33,7 +31,7 @@ window.onload = ->
       @setRanges()
       return
 
-    OmikujiBox::setRanges = ->
+    setRanges: ->
       total = 0
       @models.forEach (model) ->
         model.under = total
@@ -42,7 +40,7 @@ window.onload = ->
         return
       return
 
-    OmikujiBox::pull = ->
+    pull: ->
       random = Math.round(Math.random() * 100)
       matchIndex = 0
       @models.forEach (model, idx) ->
@@ -53,14 +51,12 @@ window.onload = ->
       @models[matchIndex].countup()
       return @models[matchIndex]
 
-    OmikujiBox::result = ->
+    result: ->
       console.log "------ #{num}回引いた結果 ------"
       @models.forEach (model) ->
         console.log "#{model.name} : #{model.count}回"
         return
       return
-
-    return OmikujiBox
 
   num = 100
   document.getElementById("omikuji").addEventListener "click", ->
