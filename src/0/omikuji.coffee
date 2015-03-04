@@ -45,11 +45,9 @@ window.onload = ->
     OmikujiBox::pull = ->
       random = Math.round(Math.random() * 100)
       matchIndex = 0
-      idx = 0
-      @models.forEach (model) ->
+      @models.forEach (model, idx) ->
         if model.under <= random and model.top > random
           matchIndex = idx
-        idx += 1
         return
 
       @models[matchIndex].countup()

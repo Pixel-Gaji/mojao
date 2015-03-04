@@ -55,15 +55,13 @@
         });
       };
       OmikujiBox.prototype.pull = function() {
-        var idx, matchIndex, random;
+        var matchIndex, random;
         random = Math.round(Math.random() * 100);
         matchIndex = 0;
-        idx = 0;
-        this.models.forEach(function(model) {
+        this.models.forEach(function(model, idx) {
           if (model.under <= random && model.top > random) {
             matchIndex = idx;
           }
-          idx += 1;
         });
         this.models[matchIndex].countup();
         return this.models[matchIndex];
