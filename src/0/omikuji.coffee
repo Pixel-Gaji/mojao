@@ -1,7 +1,8 @@
 ###
 おみくじを引いて結果を出力するだけのJS
 ###
-(->
+window.onload = ->
+
   ###
   Model
   ###
@@ -11,13 +12,13 @@
       @name  = options.name
       @percentage = options.percentage
       return
-  
+
     Omikuji::countup = ->
       @count += 1
       return
-    
+
     return Omikuji
-  
+
   ###
   Collection
   ###
@@ -31,7 +32,7 @@
       ]
       @setRanges()
       return
-  
+
     OmikujiBox::setRanges = ->
       total = 0
       @models.forEach (model) ->
@@ -40,7 +41,7 @@
         model.top = total
         return
       return
-  
+
     OmikujiBox::pull = ->
       random = Math.round(Math.random() * 100)
       matchIndex = 0
@@ -50,26 +51,27 @@
           matchIndex = idx
         idx += 1
         return
-  
+
       @models[matchIndex].countup()
       return @models[matchIndex]
-    
+
     OmikujiBox::result = ->
       console.log "------ #{num}回引いた結果 ------"
       @models.forEach (model) ->
         console.log "#{model.name} : #{model.count}回"
         return
       return
-    
+
     return OmikujiBox
-  
-  ###
-  100回引いた結果を出力
-  ###
-  box = new OmikujiBox()
+
   num = 100
-  for i in [0...num]
-    box.pull()
-  box.result()
-  
-)
+  document.getElementById("omikuji").addEventListener "click", ->
+    ###
+    100回引いた結果を出力
+    ###
+    box = new OmikujiBox()
+    for i in [0...num]
+      box.pull()
+    box.result()
+    return
+

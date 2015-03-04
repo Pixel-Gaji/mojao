@@ -5,12 +5,12 @@
  */
 
 (function() {
-  (function() {
+  window.onload = function() {
 
     /*
     Model
      */
-    var Omikuji, OmikujiBox, box, i, j, num, ref;
+    var Omikuji, OmikujiBox, num;
     Omikuji = (function() {
       Omikuji = function(options) {
         this.count = 0;
@@ -76,16 +76,19 @@
       };
       return OmikujiBox;
     })();
-
-    /*
-    100回引いた結果を出力
-     */
-    box = new OmikujiBox();
     num = 100;
-    for (i = j = 0, ref = num; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
-      box.pull();
-    }
-    return box.result();
-  });
+    return document.getElementById("omikuji").addEventListener("click", function() {
+
+      /*
+      100回引いた結果を出力
+       */
+      var box, i, j, ref;
+      box = new OmikujiBox();
+      for (i = j = 0, ref = num; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
+        box.pull();
+      }
+      box.result();
+    });
+  };
 
 }).call(this);
